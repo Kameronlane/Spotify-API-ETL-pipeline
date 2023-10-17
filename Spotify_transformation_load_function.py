@@ -97,20 +97,19 @@ def lambda_handler(event, context):
         song_df['song_added'] = pd.to_datetime(song_df['song_added']) 
         
         song_key = "transformed_data/song_data/song_transformed_" + str(datetime.now()) + ".csv"
-        song_buffer = StringIO()
-        song_df.to_csv(song_buffer, index=False)  # Fixed the typo: song.df.to.csv -> song_df.to_csv
+        song_buffer = StringIO()# Fixed the typo: song.df.to.csv -> song_df.to_csv
         song_content = song_buffer.getvalue()
         s3.put_object(Bucket=Bucket, Key=song_key, Body=song_content)
         
         album_key = "transformed_data/album_data/album_transformed_" + str(datetime.now()) + ".csv"
         album_buffer = StringIO()
-        album_df.to_csv(album_buffer, index=False)  # Fixed the typo: song.df.to.csv -> song_df.to_csv
+        album_df.to_csv(album_buffer, index=False) 
         album_content = album_buffer.getvalue()
         s3.put_object(Bucket=Bucket, Key=album_key, Body=album_content)
         
         artist_key = "transformed_data/artist_data/artist_transformed_" + str(datetime.now()) + ".csv"
         artist_buffer = StringIO()
-        artist_df.to_csv(artist_buffer, index=False)  # Fixed the typo: song.df.to.csv -> song_df.to_csv
+        artist_df.to_csv(artist_buffer, index=False) 
         artist_content = artist_buffer.getvalue()
         s3.put_object(Bucket=Bucket, Key=artist_key, Body=artist_content)
         
